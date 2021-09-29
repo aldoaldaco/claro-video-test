@@ -1,14 +1,193 @@
 .App {
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.Claro {
+.Modal {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.ModalCloseButton {
+  position: fixed;
+  top: 1rem;
+  right: 0;
+  z-index: 2;
+}
+
+.Program {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+}
+
+.Description {
+  z-index: 1;
+  width: 100%;
+  height: 20rem;
+  padding: 2rem;
+  text-align: left;
+}
+
+.Guide {
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+.GuideChannels {
+  position: absolute;
+  top: 50vh;
+  left: 0;
+  right: 60.5rem;
+  bottom: 40px;
+  padding-top: 24px;
+  overflow: hidden;
+}
+
+.GuideChannelsHeader {
+  height: 20px;
+  width: 100%;
+  position: sticky;
+  top: 0;
+}
+
+ul {
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.GuideChannelsListItem {
+  height: 5rem;
+  max-width: 100%;
+  padding-left: 1rem;
+  display: flex;
+  justify-content: flex-start;
   align-items: center;
+  text-align: left;
+}
+
+.GuideChannelsListItemImage {
+  width: 80px;
+  height: 50px;
+}
+
+.Spinner {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.GuidePrograms {
+  height: auto;
+  max-width: calc(100% - 16rem);
+  position: absolute;
+  top: 0;
+  left: 14rem;
+}
+
+.GuideProgramsHeader {
+  max-width: 100%;
+  display: flex;
+  color: #90caf9;
+  background-color: #121212;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.GuideProgramsHeaderHours {
+  display: flex;
+}
+
+.GuideProgramsHeaderHoursSlot {
+  min-width: 100px;
+  padding: 0 10px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.GuideProgramsBody {
+  margin-top: 23px;
+  overflow-x: auto;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+/*TABLE BODY*/
+.GuideProgramsBodyListItem {
+  height: 5rem;
+  display: flex;
+  align-items: center;
+}
+
+.GuideProgramsBodyListItemProgram {
+  min-width: 12.5rem;
+  border: 1px solid white;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+.GuideProgramsBodyListItemProgram:hover {
+  background-color: gray;
+  cursor: pointer;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.GuideContainer {
+    position: absolute;
+    top: 50vh;
+    left: 8rem;
+    right: 1rem;
+    bottom: 40px;
+}
+
+.GuideContainerInner {
+    height: 100%;
+    overflow: hidden;
+}
+
+.TableHeader {
+    position: relative;
+}
+
+.TableBody {
+    overflow: auto;
+}
+
+.HeaderCell {
+    min-width: 100px;
+    padding: 0 10px;
+    height: 20px;
+    text-align: center;
 }
