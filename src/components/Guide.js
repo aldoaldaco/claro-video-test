@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Typography from '@mui/material/Typography';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function Guide(props) {
 
@@ -50,9 +51,11 @@ export default function Guide(props) {
         body.style.height = `${Number(heightInner) - Number(heightHeader)}px`;
     };
 
+    const matches = useMediaQuery('(max-width:1100px)');
+
     return (
         <section className="Guide">
-            <aside className="GuideChannels">
+            <aside className="GuideChannels" style={{bottom: `${matches ? 40 : 100}px`, right: `${matches ? 12 : 60.5}rem`}}>
                 <ul id="channelList" className="GuideChannelsList">
                     {props.channels.map((channel, channelindex) => {
                         return (<li key={channelindex} className="GuideChannelsListItem">
