@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import Description from './Description';
 import Guide from './Guide';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -14,35 +14,12 @@ export default function Program() {
     const [channels, setChannels] = useState([]);
     const [program, setProgram] = useState({});
     const [showSpinner, setShowSpinner] = useState(true);
-    const getData = useCallback(() => {
-        axios({
-            method: 'get',
-            url: 'https://mfwkweb-api.clarovideo.net/services/epg/channel',
-            params: {
-                device_id: 'web',
-                device_category: 'web',
-                device_model: 'web',
-                device_type: 'web',
-                device_so: 'Chrome',
-                format: 'json',
-                device_manufacturer: 'generic',
-                authpn: 'webclient',
-                authpt: 'tfg1h3j4k6fd7',
-                api_version: 'v5.93',
-                region: 'mexico',
-                HKS: 'web61144bb49d549',
-                user_id: 54343080,
-                date_from: 20210812200256,
-                date_to: 20210813200256,
-                quantity: 200
-            }
-        }).then(response => {
-            proccessResponse(response);
-        }).catch(error => {
-            manageErrors(error);
-            setShowSpinner(false);
-        });
-    });
+
+    const manageErrors = (error) => {
+        if (error) {
+            alert(error);
+        }
+    };
 
     const proccessResponse = useCallback((response) => {
         if (response && response.data && response.data.response) {
@@ -81,13 +58,37 @@ export default function Program() {
             manageErrors(error);
             setShowSpinner(false);
         }
-    });
+    }, [setShowSpinner]);
 
-    const manageErrors = (error) => {
-        if (error) {
-            alert(error);
-        }
-    };
+    const getData = useCallback(() => {
+        axios({
+            method: 'get',
+            url: 'https://mfwkweb-api.clarovideo.net/services/epg/channel',
+            params: {
+                device_id: 'web',
+                device_category: 'web',
+                device_model: 'web',
+                device_type: 'web',
+                device_so: 'Chrome',
+                format: 'json',
+                device_manufacturer: 'generic',
+                authpn: 'webclient',
+                authpt: 'tfg1h3j4k6fd7',
+                api_version: 'v5.93',
+                region: 'mexico',
+                HKS: 'web61144bb49d549',
+                user_id: 54343080,
+                date_from: 20210812200256,
+                date_to: 20210813200256,
+                quantity: 200
+            }
+        }).then(response => {
+            proccessResponse(response);
+        }).catch(error => {
+            manageErrors(error);
+            setShowSpinner(false);
+        });
+    }, [setShowSpinner, proccessResponse]);
 
     useEffect(() => {
         getData();
@@ -95,7 +96,7 @@ export default function Program() {
             setChannels([]);
             setProgram({});
         };
-    }, []);
+    }, [getData]);
 
     const onProgramFocus = (program) => {
         const newprogram = {
