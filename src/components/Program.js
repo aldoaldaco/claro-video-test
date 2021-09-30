@@ -14,15 +14,6 @@ export default function Program() {
     const [channels, setChannels] = useState([]);
     const [program, setProgram] = useState({});
     const [showSpinner, setShowSpinner] = useState(true);
-    
-    useEffect(() => {
-        getData();
-        return () => {
-            setChannels([]);
-            setProgram({});
-        };
-    }, []);
-
     const getData = useCallback(() => {
         axios({
             method: 'get',
@@ -97,6 +88,14 @@ export default function Program() {
             alert(error);
         }
     };
+
+    useEffect(() => {
+        getData();
+        return () => {
+            setChannels([]);
+            setProgram({});
+        };
+    }, []);
 
     const onProgramFocus = (program) => {
         const newprogram = {

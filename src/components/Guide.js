@@ -5,15 +5,15 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 export default function Guide(props) {
 
     const [active, setActive] = useState(false);
-
-    useEffect(() => {
-        setTableBody();
-        const body = document.getElementById('body');
-        body.addEventListener("scroll", handleScroll);
-        return () => {
-            setActive(false);
-        };
-    }, []);
+    
+    const setTableBody = () => {
+        const header = document.getElementById("header");
+        const body = document.getElementById("body");
+        const inner = document.getElementById("inner");
+        const heightHeader = window.getComputedStyle(header).height.split('px')[0];
+        const heightInner = window.getComputedStyle(inner).height.split('px')[0];
+        body.style.height = `${Number(heightInner) - Number(heightHeader)}px`;
+    };
 
     const handleScroll = () => {
         const channelList = document.getElementById('channelList');
@@ -24,6 +24,15 @@ export default function Guide(props) {
         header.style.left = `${left}px`;
         channelList.style.top = `${top}px`;
     };
+
+    useEffect(() => {
+        setTableBody();
+        const body = document.getElementById('body');
+        body.addEventListener("scroll", handleScroll);
+        return () => {
+            setActive(false);
+        };
+    }, []);
 
     const day = "20:00hs.20:30hs.21:00hs.21:30hs.22:00hs.22:30hs.23:00hs.23:30hs.00:00hs.00:30hs.01:00hs.01:30hs.02:00hs.02:00hs.03:00hs.03:30hs.04:00hs.04:30hs.05:00hs.05:30hs.06:00hs.06:30hs.07:00hs.07:30hs.";
     const night = "08:00hs.08:30hs.09:00hs.09:30hs.10:00hs.10:30hs.11:00hs.11:30hs.12:00hs.12:30hs.13:00hs.13:30hs.14:00hs.14:30hs.15:00hs.15:30hs.16:00hs.16:30hs.17:00hs.17:30hs.18:00hs.18:30hs.19:00hs.19:30hs.";
@@ -42,20 +51,11 @@ export default function Guide(props) {
         props.onProgramFocus(program);
     };
 
-    const setTableBody = () => {
-        const header = document.getElementById("header");
-        const body = document.getElementById("body");
-        const inner = document.getElementById("inner");
-        const heightHeader = window.getComputedStyle(header).height.split('px')[0];
-        const heightInner = window.getComputedStyle(inner).height.split('px')[0];
-        body.style.height = `${Number(heightInner) - Number(heightHeader)}px`;
-    };
-
-    const matches = useMediaQuery('(max-width:1100px)');
+    const matches = useMediaQuery('(max-width: 1200px)');
 
     return (
         <section className="Guide">
-            <aside className="GuideChannels" style={{bottom: `${matches ? 40 : 100}px`, right: `${matches ? 12 : 60.5}rem`}}>
+            <aside className="GuideChannels" style={{bottom: `${matches ? 100 : 40}px`, right: `${matches ? 12 : 60.5}rem`}}>
                 <ul id="channelList" className="GuideChannelsList">
                     {props.channels.map((channel, channelindex) => {
                         return (<li key={channelindex} className="GuideChannelsListItem">

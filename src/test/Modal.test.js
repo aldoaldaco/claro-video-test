@@ -1,13 +1,14 @@
 import { configure, shallow } from 'enzyme';
 import { stub } from 'sinon';
-import Modal from './Modal';
+import { expect } from 'chai';
+import Modal from '../components/Modal';
 import Adapter from 'enzyme-adapter-react-16'
 import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
 configure({ adapter: new Adapter() });
-describe('App component testing', () => {
+describe('Modal component testing', () => {
 
-  it('renders modal when we click the button', async () => {
+  it('renders Modal', async () => {
     const closeModal = stub();
     const program = {};
     const section = <section className="Modal" data-testid="modalGuide">
@@ -17,6 +18,15 @@ describe('App component testing', () => {
             </Button>
         </div>
     </section>;
-    const wrapper = shallow(<Modal />);
+    const wrapper = shallow(<Modal canClose/>);
+  });
+  
+  it('renders children when passed in', () => {
+    const wrapper = shallow((
+      <Modal>
+        <div className="unique">Example</div>
+      </Modal>
+    ));
+    expect(wrapper.contains(<div className="unique">Example</div>)).to.be.equal(true);
   });
 });

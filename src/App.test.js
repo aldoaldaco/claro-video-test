@@ -8,7 +8,6 @@ import Button from '@mui/material/Button';
 import Adapter from 'enzyme-adapter-react-16'
 configure({ adapter: new Adapter() });
 describe('App component testing', () => {
-
   it('renders button to open modal', () => {
     const wrapper = shallow(<App />); 
     expect(wrapper.find(Button).text()).to.be.equal('Open EPG');
