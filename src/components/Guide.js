@@ -39,9 +39,9 @@ export default function Guide(props) {
     const hours = day.concat(night).split('.');
 
     const elementWidth = (program) => {
-        const time = program.duration.split(':');
+        const time = program.duration.split('h');
         const hours = Number(time[0]);
-        const minutes = Number(time[1]) / 60;
+        const minutes = Number(time[1].replace('min', '')) / 60;
         const hora = hours+minutes;
         return `${hora * 300}px`;
     };
