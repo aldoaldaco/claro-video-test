@@ -43,7 +43,7 @@ export default function Guide(props) {
         const hours = Number(time[0]);
         const minutes = Number(time[1].replace('min', '')) / 60;
         const hora = hours+minutes;
-        return `${hora * 300}px`;
+        return `${hora * 200}px`;
     };
 
     const programFocus = (program) => {
